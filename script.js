@@ -49,4 +49,64 @@ const photos = [
     },
 ];
 
-console.log('hello');
+let buttonAll = document.querySelector("#all");
+let buttonNature = document.querySelector("#nature");
+let buttonCity = document.querySelector("#city");
+let buttonAnimals = document.querySelector("#animals");
+let buttonLoad = document.querySelector("#loadMore");
+let galleryContainer = document.querySelector("#gallery");
+let state
+
+sort('all')
+function sort(t) {
+    galleryContainer.innerHTML = ' '
+    if (t == "all"){
+        for (let i = 0; i < 6; i++) {
+            const img = document.createElement('img');
+            img.src = photos[i].url
+            galleryContainer.appendChild(img)
+            state = 'all'
+        }
+    }
+    else{
+        let i = 0
+        for (let u = 0; u < photos.length; u++){
+            if (photos[u].type == t && i < 6){
+                const img = document.createElement('img');
+                img.src = photos[u].url
+                galleryContainer.appendChild(img)
+                i++
+                state = t
+            }
+        }
+    }
+}
+
+function expand(state){
+    galleryContainer.innerHTML = ' '
+    if (state == "all"){
+        for (let i = 0; i < 12; i++) {
+            const img = document.createElement('img');
+            img.src = photos[i].url
+            galleryContainer.appendChild(img)
+        }
+    }
+    else{
+        let i = 0
+        for (let u = 0; u < photos.length; u++){
+            if (photos[u].type == state && i < 12){
+                const img = document.createElement('img');
+                img.src = photos[u].url
+                galleryContainer.appendChild(img)
+                i++
+            }
+        }
+    }
+}
+
+buttonAll.addEventListener("click", () => sort('all'));
+buttonNature.addEventListener("click", () => sort('nature'));
+buttonCity.addEventListener("click", () => sort('city'));
+buttonAnimals.addEventListener("click", () => sort('animals'));
+buttonAll.addEventListener("click", () => sort('all'));
+buttonLoad.addEventListener("click", () => expand(state));
